@@ -3,22 +3,66 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Maguth</title>
+		<script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+
 		<link rel="stylesheet" href="default.css"/>
 	</head>
+	<!-- 
+	이 게임은 텍스트 기반 스토리 진행형 rpg
+	탑을 오르는 것으로
+	Maguth와 Dimensetia 계승할 것
 	
+	
+	
+	
+	주요 수치 구성
+	- 체력
+	- 허기
+	
+	
+	기본적으로는 진행은 선택지를 통한 이동(Mkrpg)와 같은 모습을 보이나
+	특정 페이즈, 맵에 대해선 기물이동방식으로 이동할 것, 그 외에 다양한 이동은 구상에만 일단 두고. 가장 기본적인 이동은 선택지.
+	
+	전투 방식에서는 베리드본즈(턴제)를 취할 것
+	장비의 경우 레벨 스케일링 적용 -> 적의 레벨을 따라감
+	장비 형태에 대해선 베리드본즈와 비슷한 형태를 취함
+	
+	
+	저장을 하되 피씨방이나 그런 외부에서도 할 수 있도록 코드화 시킬 수 있게 하자
+	dol처럼 export 기능 넣어서~
+	그래야 싸지방에서도 즐길 수 있을 듯, 이건 그냥 세이브 데이터 json으로 빼내고 인코딩에서 복붙가능하게 만들면 될 듯.
+	
+	이왕 하는 김에 그냥 쌩 html로 하지 말고 phaser라는 걸 써볼까
+	
+	
+	한 번 제대로 AI 써보자 음음
+	게임 씬 구성 요소로는 다음과 같음
+	- 메인 장면 : 처음 게임을 켰을 때 나오는 장면
+	- 전투 장면 : 적과 조우하여 전투하는 장면, 해당 장면에서는 턴제 전투가 시작됨
+	- 이동 장면 : 이동의 경우, 이벤트에서 등장한 선택지를 고름으로써 다른 이벤트를 불러오는 방식으로 진행됨. 
+	
+	
+	페이저를 이용해서 개발하자.
+	
+	도움 사이트:
+	https://www.bfxr.net/
+	-->
 	
 	<body>
-		<div id="game">
-		<canvas id="gameCanvas" width="1280" height="720"></canvas>
-		</div>
-	
-		<div id="myWord">
-			asdf
-			<br>
-			qwer
-		</div>
-		
-		<script type="module" src="main.js"></script>
+		<script>
+			const config = {
+				type: Phaser.AUTO,
+				width: 800,
+				height: 600,
+				scene: {
+					preload: function () {},
+					create: function () {
+						this.add.text(100, 100, 'Hello Phaser!', { font: '32px Arial', fill: '#fff' });
+					}
+				}
+			};
+			new Phaser.Game(config);
+		</script>
 	</body>
 	
 	

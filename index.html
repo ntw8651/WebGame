@@ -4,7 +4,16 @@
 		<meta charset="UTF-8">
 		<title>Maguth</title>
 		<script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
-
+		
+		
+		
+		
+		<!-- Load Data -->
+		<script src="./Scenes/MainMenuScene.js"></script>
+		<script src="./Scenes/BattleScene.js"></script>
+		<script src="./Scenes/MovementScene.js"></script>
+		
+		<script src="./game.js"></script>
 		<link rel="stylesheet" href="default.css"/>
 	</head>
 	<!-- 
@@ -42,6 +51,16 @@
 	- 이동 장면 : 이동의 경우, 이벤트에서 등장한 선택지를 고름으로써 다른 이벤트를 불러오는 방식으로 진행됨. 
 	
 	
+	
+	
+	
+	구성도
+	메인 -> 이동 <-> 전투
+	# 이동을 기본으로, 이동 씬에서 전투 씬으로 갈 때, 상황 데이터를 넘겨주는 방식으로 진행.
+
+	
+	
+	
 	페이저를 이용해서 개발하자.
 	
 	도움 사이트:
@@ -49,20 +68,7 @@
 	-->
 	
 	<body>
-		<script>
-			const config = {
-				type: Phaser.AUTO,
-				width: 800,
-				height: 600,
-				scene: {
-					preload: function () {},
-					create: function () {
-						this.add.text(100, 100, 'Hello Phaser!', { font: '32px Arial', fill: '#fff' });
-					}
-				}
-			};
-			new Phaser.Game(config);
-		</script>
+
 	</body>
 	
 	

@@ -1,0 +1,235 @@
+<html>
+<head>
+<style>
+
+#board {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: repeat(8, 1fr);  
+	width: 400px;
+	height: 400px;
+}
+
+.cell{
+	width: 100%;
+	height: 100%;
+	font-size: 32px;
+	justify-content: center;
+	align-items:center;
+	display: flex;
+	box-sizing: boarder-box;
+}
+
+.white-cell{
+	background-color: white;
+}
+.white-cell:hover{
+	background-color: grey; 
+}
+
+.black-cell{
+	background-color: black;
+}
+.black-cell:hover{
+	background-color: grey;
+}
+
+.white-piece{
+	color: green;
+}
+.black-piece{
+	color: grey;
+}
+
+
+
+</style>
+</head>
+
+
+
+
+<body>
+
+<div id="board"></div>
+
+
+
+
+
+
+
+<script>
+
+// 오누른 여기까지
+
+// Chess. 한 번 만들어 봤으니 다음은 더 쉽겠죠, 아니 그거 만든 걸 어케든 백업했어야 했는데;;
+// 이전 미구현된 것들
+// 앙파상, 캐슬링
+
+
+// 현재 미구현된 것들 : 화면 그리기, 기물 이동하기, 턴 교환하기, 체크 알리기, 체크시 기물 이동 막기, 기물간 제거, 시간제한 두기
+
+
+
+
+
+// #### INIT ####
+
+
+
+// #### Variables ####
+var turn = 1; // 1 - white / -1 - black
+
+
+const boardY = 8;
+const boardX = 8;
+
+var log; // for play logging(go back state)
+
+
+
+var board = new Array();
+for(let i = 0; i < boardY; i++){
+	board[i] = new Array(boardX);
+}
+
+
+
+
+// behavior rule
+// 0 : can't
+// 1 : can go and kill
+// 2 : can keep go and kill untill wall
+// 3 : only can kill
+// 4 : only can go if empty
+// 5 : special kill for angpasang
+// -1 : now Position
+
+
+const pawn = {
+	behavior : 
+		[[0, 0, 0, 0, 0],
+		[0, 3, 4, 3, 0],
+		[0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0]],
+		character : "P"
+
+};
+
+const knight = {
+	behavior : 
+		[[0, 1, 0, 1, 0],
+		[1, 0, 0, 0, 1],
+		[0, 0, -1, 0, 0],
+		[1, 0, 0, 0, 1],
+		[0, 1, 0, 1, 0]],
+	character : "K"
+};
+
+//Functions
+function MakePiece(name, team){
+	switch (name){
+		case "knight":
+			this.behavior = knight['behavior'];
+			this.character = knight['character'];
+	}
+	
+	this.name = name;
+	this.team = team;
+}
+
+function PlacePiece(x, y, name, team){
+	board[y][x] = new MakePiece(name, team);
+	
+}
+
+function RemovePiece(name, team){
+
+}
+
+
+
+function Setup(){
+	const board = document.getElementById('board')
+
+	for(let y = 0; y < boardY; y++){
+		for(let x = 0; x < boardX; x++){
+			const newCell = document.createElement('div');
+			newCell.id = x+"x"+y+"y";
+			newCell.textContent = "";
+			newCell.className += " cell";
+			if((y+x)%2){
+				newCell.className += " black-cell";
+			}
+			else{
+				newCell.className += " white-cell";
+			}
+			
+			newCell.addEventListener('click', function(){
+				OnClickCell(x, y);
+			});
+			
+			
+			
+			board.appendChild(newCell);
+		}
+	}
+	
+	
+	PlacePiece
+}
+
+// Make and Draw Screen
+
+
+function OnClickCell(x, y){
+	
+	//alert(x + y);
+	// 1. click own pawn
+		// 1-1. click can go there
+		// 1-2. click can't go there
+
+	// 2. click others
+		// cancle
+
+
+}
+
+
+
+
+function UpdatePawnOnCell(x, y){
+	const cell = document.getElementById(x+"x"+y+"y");
+	if(board[y][x] != null){
+		cell.textContent = board[y][x].character;
+	}
+}
+function UpdatePawnOnCellAll(){
+	for(let y = 0; y < boardY; y++){
+		for(let x = 0; x < boardX; x++){
+			UpdatePawnOnCell(x, y);
+		}
+	}
+}
+function DrawPawn(x, y, character){
+	const cell = document.getElementById(x+"x"+y+"y");
+	cell.textContent = character["character"];
+}
+
+
+
+
+
+
+Setup();
+
+
+
+
+</script>
+
+
+</body>
+</html>

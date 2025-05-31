@@ -129,6 +129,7 @@ const knight = {
 };
 
 //Functions
+
 function MakePiece(name, team){
 	switch (name){
 		case "knight":
@@ -142,11 +143,11 @@ function MakePiece(name, team){
 
 function PlacePiece(x, y, name, team){
 	board[y][x] = new MakePiece(name, team);
-	
+	UpdatePawnOnCell(x, y);
 }
 
 function RemovePiece(name, team){
-
+	// 사실 이건 거의 쓸모 없는 함수
 }
 
 
@@ -178,7 +179,7 @@ function Setup(){
 	}
 	
 	
-	PlacePiece
+	PlacePiece(0, 0, 'knight', -1);
 }
 
 // Make and Draw Screen
@@ -218,7 +219,7 @@ function DrawPawn(x, y, character){
 	cell.textContent = character["character"];
 }
 
-
+function ClickCell(x, y){ }
 
 
 
